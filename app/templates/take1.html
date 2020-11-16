@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <h1>Web Development @uc_sisteminformasi</h1>
+        {% if pengguna %}
+        <p>Ini website yang udah dimasuk pengguna yang namannya {{pengguna.username}}</p>
+        {% else %}
+        <p>Ini website yang belum login, mau tau nama? silahkan login!!!</p>
+        {% endif %}
+    </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        {% if pengguna %}
+        <a class="navbar-brand" href="#">ISB {{pengguna.username}}</a>
+        {% else %}
+        <a class="navbar-brand" href="#">ISB</a>
+        {% endif %}
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                {% if pengguna %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Log Out</a>
+                </li> 
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-warning" href="register">Register</a>
+                </li>                
+                {% endif %}
+
+
+            </ul>
+        </div>
+    </nav>
+    {% block content %}
+    
+    {% endblock %}
+
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <p>&copy;2020. Web Development</p>
+    </div>
+
+    <!--styles-->
+    <style>
+        .fakeimg {
+            height: 200px;
+            background: #aaa;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.min.css')}}">
+    <link rel='stylesheet' href="{{ url_for('static', filename='/css/fontawesome.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css')}}">
+
+    <!--scripts-->
+    <script src="{{ url_for('static', filename='/js/jquery3.5.1.js')}}"></script>
+    <script src="{{ url_for('static', filename='/popper/js/popper.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        })
+    </script>
+</body>
+
+</html>
