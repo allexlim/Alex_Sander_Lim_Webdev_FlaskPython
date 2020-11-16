@@ -36,15 +36,15 @@ def login():
 	session["username"] = "alex"
 	session["password"] = "alex"
 	if request.method == "POST":
-		if cek=='ada':
-			return render_template('gambar.html', pengguna=session)
-		else:
 			if request.form["nama_user"] != session["username"]:
 				error = 'Username is not exist'
 				return render_template('login.html', error=error)
 			else:
 				if request.form["kata_sandi"] == session["password"]:
-					return render_template('index2.html', pengguna=session)	
+					if cek=='ada':
+						return render_template('gambar.html', pengguna=session)
+					else:
+						return render_template('index2.html', pengguna=session)	
 				else:
 					error = 'password is invalid'
 					return render_template('login.html', error=error, pengguna=session)	
